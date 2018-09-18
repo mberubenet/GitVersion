@@ -18,20 +18,20 @@ namespace GitVersion.AcceptanceTests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Versionning release branches")]
-    public partial class VersionningReleaseBranchesFeature
+    [NUnit.Framework.DescriptionAttribute("Versioning release branches")]
+    public partial class VersioningReleaseBranchesFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "VersionningReleaseBranches.feature"
+#line 1 "VersioningReleaseBranches.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Versionning release branches", "\tIn order to track release number\r\n\tAs a committer\r\n\tI want git version to automa" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Versioning release branches", "\tIn order to track release number\r\n\tAs a committer\r\n\tI want git version to automa" +
                     "tically generate the release number", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -81,12 +81,10 @@ namespace GitVersion.AcceptanceTests
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("I create a branch named (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.When("I create a release branch named (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
  testRunner.Then("The version should be (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -97,18 +95,16 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateVersionnedReleaseBranchAndCommit()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch and commit", null, ((string[])(null)));
-#line 13
+#line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 13
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.When("I create a branch named (\"release/1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 15
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
- testRunner.When("I create a release branch named (\"release/1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 18
+#line 16
  testRunner.Then("The version should be (\"1.1.0-release.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -119,20 +115,18 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateVersionnedReleaseBranchAndCommitTwice()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch and commit twice", null, ((string[])(null)));
-#line 20
+#line 18
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 19
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+ testRunner.When("I create a branch named (\"release/1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 21
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 23
- testRunner.When("I create a release branch named (\"release/1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 24
-    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 25
-    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
  testRunner.Then("The version should be (\"1.1.0-release.1+2\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -143,20 +137,18 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateVersionnedReleaseBranchCommitAndTag()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch, commit and tag", null, ((string[])(null)));
-#line 28
+#line 25
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 29
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 30
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
- testRunner.When("I create a release branch named (\"release/1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
+#line 26
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 27
+ testRunner.When("I create a branch named (\"release/1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 29
     testRunner.And("I create a tag named (\"v1.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 34
+#line 30
  testRunner.Then("The version should be (\"1.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -167,16 +159,14 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateNamedReleaseBranch()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named release branch", null, ((string[])(null)));
-#line 36
+#line 32
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 37
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 38
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
- testRunner.When("I create a release branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 40
+#line 33
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 34
+ testRunner.When("I create a branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 35
  testRunner.Then("The version should be (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -187,18 +177,16 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateNamedReleaseBranchAndCommit()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named release branch and commit", null, ((string[])(null)));
-#line 42
+#line 37
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 43
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 44
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
- testRunner.When("I create a release branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 46
+#line 38
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 39
+ testRunner.When("I create a branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 40
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
+#line 41
  testRunner.Then("The version should be (\"1.0.1-Magasinez.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -209,20 +197,18 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateNamedReleaseBranchAndCommitTwice()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named release branch and commit twice", null, ((string[])(null)));
-#line 49
+#line 43
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 50
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
- testRunner.When("I create a release branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 53
+#line 44
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 45
+ testRunner.When("I create a branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 46
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 47
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 48
  testRunner.Then("The version should be (\"1.0.1-Magasinez.1+2\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -233,20 +219,18 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateNamedReleaseBranchCommitAndTag()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named release branch, commit and tag", null, ((string[])(null)));
-#line 57
+#line 50
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 58
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 59
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 60
- testRunner.When("I create a release branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 61
+#line 51
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 52
+ testRunner.When("I create a branch named (\"release/Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 53
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 54
     testRunner.And("I create a tag named (\"v1.2.1-Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 55
  testRunner.Then("The version should be (\"1.2.1-Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -257,18 +241,16 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateNamedAndVersionnedReleaseBranchAndCommit()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named and versionned release branch and commit", null, ((string[])(null)));
-#line 65
+#line 57
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 66
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 67
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 68
- testRunner.When("I create a release branch named (\"release/1.1-Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 69
+#line 58
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 59
+ testRunner.When("I create a branch named (\"release/1.1-Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 60
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 70
+#line 61
  testRunner.Then("The version should be (\"1.1.0-Magasinez.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -279,20 +261,18 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateNamedAndVersionnedReleaseBranchAndCommitTwice()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named and versionned release branch and commit twice", null, ((string[])(null)));
-#line 72
+#line 63
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 73
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 74
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 75
- testRunner.When("I create a release branch named (\"release/1.1-Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 76
+#line 64
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 65
+ testRunner.When("I create a branch named (\"release/1.1-Magasinez\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 66
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 77
+#line 67
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 78
+#line 68
  testRunner.Then("The version should be (\"1.1.0-Magasinez.1+2\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

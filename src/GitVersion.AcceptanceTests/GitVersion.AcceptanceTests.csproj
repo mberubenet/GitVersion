@@ -44,15 +44,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>MergingReleaseIntoMaster.feature</DependentUpon>
     </Compile>
-    <Compile Update="VersionningMasterBranch.feature.cs">
+    <Compile Update="VersioningHotfixBranches.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>VersionningMasterBranch.feature</DependentUpon>
+      <DependentUpon>VersioningHotfixBranches.feature</DependentUpon>
     </Compile>
-    <Compile Update="VersionningReleaseBranches.feature.cs">
+    <Compile Update="VersioningMasterBranch.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>VersionningReleaseBranches.feature</DependentUpon>
+      <DependentUpon>VersioningMasterBranch.feature</DependentUpon>
+    </Compile>
+    <Compile Update="VersioningReleaseBranches.feature.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VersioningReleaseBranches.feature</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -61,13 +66,17 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MergingReleaseIntoMaster.feature.cs</LastGenOutput>
     </None>
-    <None Update="VersionningMasterBranch.feature">
+    <None Update="VersioningHotfixBranches.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>VersionningMasterBranch.feature.cs</LastGenOutput>
+      <LastGenOutput>VersioningHotfixBranches.feature.cs</LastGenOutput>
     </None>
-    <None Update="VersionningReleaseBranches.feature">
+    <None Update="VersioningMasterBranch.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>VersionningReleaseBranches.feature.cs</LastGenOutput>
+      <LastGenOutput>VersioningMasterBranch.feature.cs</LastGenOutput>
+    </None>
+    <None Update="VersioningReleaseBranches.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>VersioningReleaseBranches.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

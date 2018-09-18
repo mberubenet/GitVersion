@@ -18,20 +18,20 @@ namespace GitVersion.AcceptanceTests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Versionning master branche")]
-    public partial class VersionningMasterBrancheFeature
+    [NUnit.Framework.DescriptionAttribute("Versioning master branch")]
+    public partial class VersioningMasterBranchFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "VersionningMasterBranch.feature"
+#line 1 "VersioningMasterBranch.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Versionning master branche", "\tIn order to track master version number\r\n\tAs a committer\r\n\tI want git version to" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Versioning master branch", "\tIn order to track master version number\r\n\tAs a committer\r\n\tI want git version to" +
                     " automatically generate the master version number", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -81,12 +81,10 @@ namespace GitVersion.AcceptanceTests
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 8
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 10
  testRunner.When("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
+#line 10
  testRunner.Then("The version should be (\"1.0.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -97,16 +95,14 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateATag()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a tag", null, ((string[])(null)));
-#line 13
+#line 12
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 13
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 14
- testRunner.Given("A master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 15
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
  testRunner.When("I create a tag named (\"v1.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
+#line 15
  testRunner.Then("The version should be (\"1.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -117,16 +113,14 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void CreateATagLowerThanCurrentVersion()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a tag lower than current version", null, ((string[])(null)));
-#line 20
+#line 18
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 21
- testRunner.Given("A master branch at version (\"1.4.5\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 22
-    testRunner.And("An external configuration at path (\"Asset/TestGJCConfiguration.yml\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 23
+#line 19
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.4.5\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
  testRunner.When("I create a tag named (\"v0.8.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 24
+#line 21
  testRunner.Then("The version should be (\"1.4.5\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

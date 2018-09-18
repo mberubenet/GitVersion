@@ -35,11 +35,19 @@ namespace GitVersionCore.AcceptanceTests
             Config = ConfigSerialiser.Read(configReader);
         }
 
-        [When(@"I create a release branch named \(""(.*)""\)")]
-        public void WhenICreateAReleaseBranchNamed(string branchName)
+        [Given(@"GitVersion configured and a master branch at version \(""(.*)""\)")]
+        public void GivenGitVersionConfiguredAndAMasterBranchAtVersion(string startingVersion)
+        {
+            GivenAMasterBranchAtVersion(startingVersion);
+            GivenAnExternalConfigurationAtPath("Asset/TestGJCConfiguration.yml");
+        }
+
+        [When(@"I create a branch named \(""(.*)""\)")]
+        public void WhenICreateABranchNamed(string branchName)
         {
             RepositoryFixture.BranchTo(branchName);
         }
+
 
         [When(@"I create a commit")]
         public void WhenICreateACommit()
