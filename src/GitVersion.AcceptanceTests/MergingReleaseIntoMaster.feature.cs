@@ -71,11 +71,11 @@ namespace GitVersion.AcceptanceTests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create versionned release branch and merge back to master")]
+        [NUnit.Framework.DescriptionAttribute("Create versioned release branch and merge back to master")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void CreateVersionnedReleaseBranchAndMergeBackToMaster()
+        public virtual void CreateVersionedReleaseBranchAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch and merge back to master", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versioned release branch and merge back to master", null, new string[] {
                         "mytag"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
@@ -95,10 +95,10 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create versionned release branch, tag deploy version and merge back to master")]
-        public virtual void CreateVersionnedReleaseBranchTagDeployVersionAndMergeBackToMaster()
+        [NUnit.Framework.DescriptionAttribute("Create versioned release branch, tag deploy version and merge back to master")]
+        public virtual void CreateVersionedReleaseBranchTagDeployVersionAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch, tag deploy version and merge back to master", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versioned release branch, tag deploy version and merge back to master", null, ((string[])(null)));
 #line 14
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -119,12 +119,10 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create versionned release branch, tag with named version and merge back to master" +
-            "")]
-        public virtual void CreateVersionnedReleaseBranchTagWithNamedVersionAndMergeBackToMaster()
+        [NUnit.Framework.DescriptionAttribute("Create versioned release branch, tag with named version and merge back to master")]
+        public virtual void CreateVersionedReleaseBranchTagWithNamedVersionAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch, tag with named version and merge back to master" +
-                    "", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versioned release branch, tag with named version and merge back to master", null, ((string[])(null)));
 #line 22
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -145,10 +143,10 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create versionned release branch, tag numbered version and merge back to master")]
-        public virtual void CreateVersionnedReleaseBranchTagNumberedVersionAndMergeBackToMaster()
+        [NUnit.Framework.DescriptionAttribute("Create versioned release branch, tag numbered version and merge back to master")]
+        public virtual void CreateVersionedReleaseBranchTagNumberedVersionAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versionned release branch, tag numbered version and merge back to master", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versioned release branch, tag numbered version and merge back to master", null, ((string[])(null)));
 #line 30
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -219,12 +217,12 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create named release branch, merge it to a versionned branch then merge back to m" +
-            "aster")]
-        public virtual void CreateNamedReleaseBranchMergeItToAVersionnedBranchThenMergeBackToMaster()
+        [NUnit.Framework.DescriptionAttribute("Create named release branch, merge it to a versioned branch then merge back to ma" +
+            "ster")]
+        public virtual void CreateNamedReleaseBranchMergeItToAVersionedBranchThenMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named release branch, merge it to a versionned branch then merge back to m" +
-                    "aster", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create named release branch, merge it to a versioned branch then merge back to ma" +
+                    "ster", null, ((string[])(null)));
 #line 57
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -235,17 +233,49 @@ this.ScenarioInitialize(scenarioInfo);
 #line 60
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 61
-    testRunner.And("I create a branch named (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I checkout branch(\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 62
-    testRunner.And("I merge (\"release-Magasinez\") to (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I create a branch named (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 63
-    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I merge (\"release-Magasinez\") to (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 64
-    testRunner.And("I create a tag named (\"v1.1.0-Production\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 65
-    testRunner.And("I merge (\"release-1.1\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+    testRunner.And("I create a tag named (\"v1.1.0-Production\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 66
+    testRunner.And("I merge (\"release-1.1\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 67
  testRunner.Then("The version should be (\"1.1.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Create versioned release branch, merge it to master, add commit to release and me" +
+            "rge again")]
+        public virtual void CreateVersionedReleaseBranchMergeItToMasterAddCommitToReleaseAndMergeAgain()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versioned release branch, merge it to master, add commit to release and me" +
+                    "rge again", null, ((string[])(null)));
+#line 69
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 70
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 71
+ testRunner.When("I create a branch named (\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 72
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 73
+    testRunner.And("I merge (\"release-1.1\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 74
+    testRunner.And("I checkout branch(\"release-1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 75
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 76
+    testRunner.And("I merge (\"release-1.1\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 77
+ testRunner.Then("The version should be (\"1.1.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

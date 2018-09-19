@@ -13,7 +13,7 @@ namespace GitVersionCore.AcceptanceTests
     {
         static GenerateReleaseVersionNumberSteps()
         {
-            SetLogger(LogLevel.Warn);
+            SetLogger(LogLevel.Info);
         }
 
         [Given(@"A master branch at version \(""(.*)""\)")]
@@ -42,6 +42,16 @@ namespace GitVersionCore.AcceptanceTests
             GivenAnExternalConfigurationAtPath("Asset/TestGJCConfiguration.yml");
         }
 
+        [Given(@"GitVersion configured and a release branch named \(""(.*)""\)")]
+        public void GivenGitVersionConfiguredAndAReleaseBranchNamed(string branchName)
+        {
+            GivenAMasterBranchAtVersion("1.0.0");
+            GivenAnExternalConfigurationAtPath("Asset/TestGJCConfiguration.yml");
+            WhenICreateABranchNamed(branchName);
+            WhenICreateACommit();
+        }
+
+
         [When(@"I create a branch named \(""(.*)""\)")]
         public void WhenICreateABranchNamed(string branchName)
         {
@@ -68,6 +78,11 @@ namespace GitVersionCore.AcceptanceTests
             RepositoryFixture.ApplyTag(tagName);
         }
 
+        [When(@"I checkout branch\(""(.*)""\)")]
+        public void WhenICheckoutBranch(string branchName)
+        {
+            RepositoryFixture.Checkout(branchName);
+        }
 
 
         [Then(@"The version should be \(""(.*)""\)")]

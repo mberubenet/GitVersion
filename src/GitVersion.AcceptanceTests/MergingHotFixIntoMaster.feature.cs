@@ -18,21 +18,21 @@ namespace GitVersion.AcceptanceTests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Versioning hotfix branches")]
-    public partial class VersioningHotfixBranchesFeature
+    [NUnit.Framework.DescriptionAttribute("Merging Hotfix Into Master")]
+    public partial class MergingHotfixIntoMasterFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "VersioningHotfixBranches.feature"
+#line 1 "MergingHotFixIntoMaster.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Versioning hotfix branches", "\tIn order to track hotfix version number\r\n\tAs a committer\r\n\tI want git version to" +
-                    " automatically generate the hotfix version number", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Merging Hotfix Into Master", "\tIn order to do a hotfix in production\r\n\tAs a committer\r\n\tI want git version to a" +
+                    "utomatically generate the master version after the merge", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -71,11 +71,11 @@ namespace GitVersion.AcceptanceTests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a hotfix branch")]
+        [NUnit.Framework.DescriptionAttribute("Create hotfix branch and merge back to master")]
         [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void CreateAHotfixBranch()
+        public virtual void CreateHotfixBranchAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a hotfix branch", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create hotfix branch and merge back to master", null, new string[] {
                         "mytag"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);
@@ -85,67 +85,57 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  testRunner.When("I create a branch named (\"hotfix/crash\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
- testRunner.Then("The version should be (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a hotfix branch and commit")]
-        public virtual void CreateAHotfixBranchAndCommit()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a hotfix branch and commit", null, ((string[])(null)));
-#line 12
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 13
- testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 14
- testRunner.When("I create a branch named (\"hotfix/crash\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
     testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
- testRunner.Then("The version should be (\"1.0.1-hotfix.crash.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 11
+    testRunner.And("I merge (\"hotfix/crash\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
+ testRunner.Then("The version should be (\"1.0.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a tag")]
-        public virtual void CreateATag()
+        [NUnit.Framework.DescriptionAttribute("Create hotfix branch with two commits and merge back to master")]
+        public virtual void CreateHotfixBranchWithTwoCommitsAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a tag", null, ((string[])(null)));
-#line 18
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create hotfix branch with two commits and merge back to master", null, ((string[])(null)));
+#line 14
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 19
+#line 15
  testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 20
+#line 16
  testRunner.When("I create a branch named (\"hotfix/crash\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 21
-    testRunner.And("I create a tag named (\"v1.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 22
- testRunner.Then("The version should be (\"1.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 17
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+    testRunner.And("I merge (\"hotfix/crash\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 20
+ testRunner.Then("The version should be (\"1.0.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create a tag lower than current version")]
-        public virtual void CreateATagLowerThanCurrentVersion()
+        [NUnit.Framework.DescriptionAttribute("Create versioned hotfix branch and merge back to master")]
+        public virtual void CreateVersionedHotfixBranchAndMergeBackToMaster()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create a tag lower than current version", null, ((string[])(null)));
-#line 25
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create versioned hotfix branch and merge back to master", null, ((string[])(null)));
+#line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 24
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.0.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 25
+ testRunner.When("I create a branch named (\"hotfix-1.0.2\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 26
- testRunner.Given("GitVersion configured and a master branch at version (\"1.4.5\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+    testRunner.And("I create a commit", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
- testRunner.When("I create a branch named (\"hotfix/crash\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.And("I merge (\"hotfix-1.0.2\") to (\"master\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 28
-    testRunner.And("I create a tag named (\"v0.2.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
- testRunner.Then("The version should be (\"1.4.5\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The version should be (\"1.0.2\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

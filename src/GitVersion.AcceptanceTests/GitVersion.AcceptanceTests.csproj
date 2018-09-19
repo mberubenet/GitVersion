@@ -39,10 +39,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="MergingHotFixIntoMaster.feature.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MergingHotFixIntoMaster.feature</DependentUpon>
+    </Compile>
     <Compile Update="MergingReleaseIntoMaster.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MergingReleaseIntoMaster.feature</DependentUpon>
+    </Compile>
+    <Compile Update="VersioningFeatureBranches.feature.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VersioningFeatureBranches.feature</DependentUpon>
     </Compile>
     <Compile Update="VersioningHotfixBranches.feature.cs">
       <DesignTime>True</DesignTime>
@@ -62,9 +72,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="MergingHotFixIntoMaster.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MergingHotFixIntoMaster.feature.cs</LastGenOutput>
+    </None>
     <None Update="MergingReleaseIntoMaster.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MergingReleaseIntoMaster.feature.cs</LastGenOutput>
+    </None>
+    <None Update="VersioningFeatureBranches.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>VersioningFeatureBranches.feature.cs</LastGenOutput>
     </None>
     <None Update="VersioningHotfixBranches.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
