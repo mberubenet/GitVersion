@@ -28,6 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Enums.Net" Version="2.3.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="Specflow" Version="2.4.0" />
     <PackageReference Include="Specflow.NUnit" Version="2.4.0" />
@@ -48,6 +49,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MergingReleaseIntoMaster.feature</DependentUpon>
+    </Compile>
+    <Compile Update="RealWorldProject.feature.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RealWorldProject.feature</DependentUpon>
     </Compile>
     <Compile Update="VersioningFeatureBranches.feature.cs">
       <DesignTime>True</DesignTime>
@@ -79,6 +85,10 @@
     <None Update="MergingReleaseIntoMaster.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MergingReleaseIntoMaster.feature.cs</LastGenOutput>
+    </None>
+    <None Update="RealWorldProject.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RealWorldProject.feature.cs</LastGenOutput>
     </None>
     <None Update="VersioningFeatureBranches.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

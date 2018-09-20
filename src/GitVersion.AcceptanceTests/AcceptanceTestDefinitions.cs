@@ -8,6 +8,9 @@ using GitVersionCore.Tests;
 
 namespace GitVersionCore.AcceptanceTests
 {
+    using EnumsNET;
+    using GitVersion.AcceptanceTests;
+
     [Binding]
     public class GenerateReleaseVersionNumberSteps
     {
@@ -84,6 +87,41 @@ namespace GitVersionCore.AcceptanceTests
             RepositoryFixture.Checkout(branchName);
         }
 
+        [When(@"I have the following events")]
+        public void WhenIHaveTheFollowingEvents(Table table)
+        {
+            foreach (var row in table.Rows)
+            {
+                var actionRow = GetActionRow(row)
+                var action = Enums.Parse<LogAction>(row["ACTION"], EnumFormat.Description);
+                switch (actionRow.Action)
+                {
+                    case LogAction.Commit:
+                        ApplyCommit(GetActionRow(row));
+                        break;
+                    case LogAction.Merge:
+                        ApplyMerge(GetActionRow(row));
+                        break;
+                    case LogAction.Tag:
+                        ApplyTag(GetActionRow(row));
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
+
+        private ActionRow GetActionRow(TableRow row)
+        {
+            return new ActionRow()
+            {
+                SHA= row["SHA"],
+                Branch = row["BRANCH"],
+                Action = Enums.Parse<LogAction>(row["ACTION"], EnumFormat.Description),
+                MergeSourceBranch=row["MERGE_SOURCE"],
+                Message=row["Message"]
+            };
+        }
 
         [Then(@"The version should be \(""(.*)""\)")]
         public void ThenTheVersionShouldBe(string expectedVersion)
@@ -147,5 +185,14 @@ namespace GitVersionCore.AcceptanceTests
                 Console.WriteLine(message);
             }
         }
+    }
+
+    internal class ActionRow
+    {
+        public string SHA { get; set; }
+        public string Branch { get; set; }
+        public LogAction Action { get; set; }
+        public string MergeSourceBranch { get; set; }
+        public string Message { get; set; }
     }
 }
