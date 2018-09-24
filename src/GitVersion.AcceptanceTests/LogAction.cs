@@ -15,6 +15,8 @@ namespace GitVersion.AcceptanceTests
         [Description("M")]
         Merge,
         [Description("T")]
-        Tag
+        Tag,
+        [Description("B")]
+        Branch
     }
 }

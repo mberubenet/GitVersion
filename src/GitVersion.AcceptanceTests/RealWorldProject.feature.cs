@@ -31,7 +31,7 @@ namespace GitVersion.AcceptanceTests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Real World Project", "\tIn order to verify the impact of GitVersion\r\n\tAs a math idiot\r\n\tI want to reprod" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Real World Project", "\tIn order to verify the impact of GitVersion\r\n\tAs a developper\r\n\tI want to reprod" +
                     "uce history of a real world project", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -106,11 +106,18 @@ this.ScenarioInitialize(scenarioInfo);
                         "#3365 : Ajout du concept de livraison en magasin dans les object du panier (1 de " +
                             "X)"});
             table1.AddRow(new string[] {
+                        "1.1",
+                        "TEST1111",
+                        "release/migration-episerver",
+                        "C",
+                        "master",
+                        ""});
+            table1.AddRow(new string[] {
                         "2",
                         "be24f9508",
                         "feature/migration-episerver",
                         "C",
-                        "",
+                        "release/migration-episerver",
                         "Changements dans le calcul des taxes pour ne pas calculer les taxes sur certains " +
                             "produits"});
             table1.AddRow(new string[] {
@@ -121,20 +128,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3458 - Afficher Message important lorsque c\'est une produit santé d\'annexe 0"});
             table1.AddRow(new string[] {
-                        "4",
-                        "4f76edb18",
-                        "feature/migration-episerver",
-                        "C",
-                        "",
-                        "#3456 - Ajouter la mention de l\'OPQ dans le bloc en succursale"});
-            table1.AddRow(new string[] {
-                        "5",
-                        "74810224b",
-                        "feature/migration-episerver",
-                        "C",
-                        "",
-                        "#3458 - Code refactoring"});
-            table1.AddRow(new string[] {
                         "6",
                         "5963b7b2b",
                         "feature/cueillette-en-magasin/3365",
@@ -142,20 +135,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3365 : Ajout du concept de livraison en magasin dans les object du panier (2 de " +
                             "2)"});
-            table1.AddRow(new string[] {
-                        "7",
-                        "969fbd708",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "Retrait d\'un using innutile­."});
-            table1.AddRow(new string[] {
-                        "8",
-                        "529047b7a",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "Retrait d\'un TODO innutile."});
             table1.AddRow(new string[] {
                         "9",
                         "5e7215e0f",
@@ -180,26 +159,11 @@ this.ScenarioInitialize(scenarioInfo);
                         "#3365 : Permettre de forcer le rafraichissement de l\'adresse de livraison en maga" +
                             "sin."});
             table1.AddRow(new string[] {
-                        "12",
-                        "636a11d3b",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Retourner null si on change l\'adresse de pickup a une temporaire"});
-            table1.AddRow(new string[] {
-                        "13",
-                        "921e02be8",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Gérer les addresse de pickup lors du ménage d\'un guest account (au logout" +
-                            ")."});
-            table1.AddRow(new string[] {
                         "14",
                         "f41b35b0d",
                         "feature/cueillette-en-magasin/3368",
                         "C",
-                        "",
+                        "release/cueillette-en-magasin",
                         "#3368 : Panier : Onglets + Custom css"});
             table1.AddRow(new string[] {
                         "15",
@@ -208,20 +172,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3365 : Permettre la validation de la succursale de l\'adresse de pickup"});
-            table1.AddRow(new string[] {
-                        "16",
-                        "bf6dbbd68",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3384 : Valider que l\'adresse de livraison est bonne avant de passer la commande"});
-            table1.AddRow(new string[] {
-                        "17",
-                        "58c0da733",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Réduire le neasting des if"});
             table1.AddRow(new string[] {
                         "18",
                         "3996f4923",
@@ -260,6 +210,13 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "master",
                         "#3456 -  Ajustement des styles OPQ"});
+            table1.AddRow(new string[] {
+                        "23\'",
+                        "TESTAAAAA",
+                        "hotfix/3487",
+                        "B",
+                        "master",
+                        "PR 1288: #3487 Retrait du segment product codes qui ne servait pas à l\'envoi des"});
             table1.AddRow(new string[] {
                         "23",
                         "cad321d1f",
@@ -311,35 +268,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "#3365 : Ajout de la différenciation des méthode de livraison succursale et domici" +
                             "le."});
             table1.AddRow(new string[] {
-                        "29",
-                        "6e44b449e",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Utiliser les OrderNotes pour géré les 2 méthode de livraison (1 de X)"});
-            table1.AddRow(new string[] {
-                        "30",
-                        "f833e6da4",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Gestion du transfert d\'info quand un guest se déconnecte + Cleanup des no" +
-                            "tes"});
-            table1.AddRow(new string[] {
-                        "31",
-                        "1b93497cf",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Fix suites aux commentaire du Pull Request"});
-            table1.AddRow(new string[] {
-                        "32",
-                        "83f10c78b",
-                        "feature/cueillette-en-magasin/3365",
-                        "C",
-                        "",
-                        "#3365 : Ajout de détail sur les obsoletes"});
-            table1.AddRow(new string[] {
                         "33",
                         "1178dab31",
                         "release/cueillette-en-magasin",
@@ -347,6 +275,13 @@ this.ScenarioInitialize(scenarioInfo);
                         "feature/cueillette-en-magasin/3365",
                         "PR 1300: Merge feature/cueillette-en-magasin/3365 to release/cueillette-en-magasi" +
                             "n"});
+            table1.AddRow(new string[] {
+                        "34\'",
+                        "TESTBBBB",
+                        "merge-master-cueillette",
+                        "B",
+                        "master",
+                        "Merge branch \'master\' into merge-master-cueillette"});
             table1.AddRow(new string[] {
                         "34",
                         "07416ece5",
@@ -416,34 +351,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3365 : Ajout d\'une fonction pour setter le shipping choice."});
             table1.AddRow(new string[] {
-                        "43",
-                        "b10510190",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "Fix pour PR"});
-            table1.AddRow(new string[] {
-                        "44",
-                        "e0befa14f",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "Ajout d\'un commentaire pour clarifier une section du code"});
-            table1.AddRow(new string[] {
-                        "45",
-                        "037b26386",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "Fix suite aux commentaire du PR"});
-            table1.AddRow(new string[] {
-                        "46",
-                        "aa445c626",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "Éviter les lignes trop longues"});
-            table1.AddRow(new string[] {
                         "47",
                         "654c33b54",
                         "release/cueillette-en-magasin",
@@ -459,14 +366,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3384 : Ajout des erreurs dans le view Model"});
             table1.AddRow(new string[] {
-                        "49",
-                        "1599bfce8",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "#3368 : Cacher la livraison dans le sommaire du prix quand on est en pickup (1 de" +
-                            " X)"});
-            table1.AddRow(new string[] {
                         "50",
                         "5096bf7c9",
                         "feature/cueillette-en-magasin/3370",
@@ -481,20 +380,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3368 -  Shipping choice cart + checkout (WIP)"});
-            table1.AddRow(new string[] {
-                        "52",
-                        "842c07b61",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "#3384 : Cacher la livraison quand on est en pickup"});
-            table1.AddRow(new string[] {
-                        "53",
-                        "d2a053b99",
-                        "feature/cueillette-en-magasin/3384",
-                        "C",
-                        "",
-                        "#3384 : Retrait d\'un todo pour les tests"});
             table1.AddRow(new string[] {
                         "54",
                         "2836ccb10",
@@ -525,20 +410,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3368 - Shipping Choice (WIP)"});
-            table1.AddRow(new string[] {
-                        "58",
-                        "767ba4d4e",
-                        "feature/cueillette-en-magasin/3368",
-                        "C",
-                        "",
-                        "#3368 - Code refactoring"});
-            table1.AddRow(new string[] {
-                        "59",
-                        "f714a1360",
-                        "feature/cueillette-en-magasin/3368",
-                        "C",
-                        "",
-                        "#3368 - Corrections suite au pull request"});
             table1.AddRow(new string[] {
                         "60",
                         "9b9b5d99f",
@@ -707,13 +578,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3368 - Pickup in store tab content"});
             table1.AddRow(new string[] {
-                        "82",
-                        "ed88c1cd3",
-                        "feature/cueillette-en-magasin/3368",
-                        "C",
-                        "",
-                        "#3368 - Corrections suite au pull request : traductions"});
-            table1.AddRow(new string[] {
                         "83",
                         "b944af984",
                         "release/cueillette-en-magasin",
@@ -744,13 +608,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3439 : Mettre à jour la dll the GJCEcommerce.BusinessLogic"});
-            table1.AddRow(new string[] {
-                        "87",
-                        "ff2a31038",
-                        "feature/cueillette-en-magasin/3439",
-                        "C",
-                        "",
-                        "#3439 : Géré les commande de cueillette dans la liste des commandes."});
             table1.AddRow(new string[] {
                         "88",
                         "93a004ef3",
@@ -805,20 +662,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3368 -  Ajout du code de PickupInStore pour page de livraison"});
             table1.AddRow(new string[] {
-                        "95",
-                        "570445e2e",
-                        "feature/cueillette-en-magasin/3368",
-                        "C",
-                        "",
-                        "#3371 - Initialisation du constructeur"});
-            table1.AddRow(new string[] {
-                        "96",
-                        "56bbe065c",
-                        "feature/cueillette-en-magasin/3368",
-                        "C",
-                        "",
-                        "#3371 - Correction suite au Pull Request + Code refactoring"});
-            table1.AddRow(new string[] {
                         "97",
                         "c1d460bba",
                         "release/cueillette-en-magasin",
@@ -831,7 +674,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "7d04bce36",
                         "feature/cueillette-en-magasin/3405",
                         "C",
-                        "feature/cueillette-en-magasin/3405",
+                        "release/cueillette-en-magasin",
                         "#3405 : Gérer le commande pickup dans le détail (mon compte)"});
             table1.AddRow(new string[] {
                         "99",
@@ -904,14 +747,14 @@ this.ScenarioInitialize(scenarioInfo);
                         "7b0942a22",
                         "feature/cueillette-en-magasin/3371",
                         "C",
-                        "feature/cueillette-en-magasin/3371",
+                        "release/cueillette-en-magasin",
                         "#3871 - Navigation tabs (style) WIP"});
             table1.AddRow(new string[] {
                         "109",
                         "beb59677b",
                         "feature/cueillette-en-magasin/3382",
                         "C",
-                        "feature/cueillette-en-magasin/3382",
+                        "release/cueillette-en-magasin",
                         "#3382 : Correction de l\'affichage des addresses dans l\'étape de paiement en guest" +
                             " quand on est en pickup"});
             table1.AddRow(new string[] {
@@ -992,22 +835,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3371 - WIP style des onglets"});
-            table1.AddRow(new string[] {
-                        "120",
-                        "7c48535c2",
-                        "feature/cueillette-en-magasin/3371",
-                        "C",
-                        "",
-                        "#3371 - Déplacement des adresses de livraisons dans l\'onglet"});
-            table1.AddRow(new string[] {
-                        "121",
-                        "200ef5f0a",
-                        "feature/cueillette-en-magasin/3371",
-                        "C",
-                        "",
-                        "Merge branch \'feature/cueillette-en-magasin/3371\' of http://tfs2015.jeancoutu.com" +
-                            ":8080/tfs/internet/_git/JeanCoutu.WebSite into feature/cueillette-en-magasin/337" +
-                            "1"});
             table1.AddRow(new string[] {
                         "122",
                         "63d4bc858",
@@ -1147,13 +974,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "#3370 : Restoring scroll on pager for landing store locator + Removing dummy butt" +
                             "ons to show Cart Overlay"});
             table1.AddRow(new string[] {
-                        "140",
-                        "6f2137119",
-                        "feature/cueillette-en-magasin/3370",
-                        "C",
-                        "",
-                        "#3370 : Fix (code reviews)"});
-            table1.AddRow(new string[] {
                         "141",
                         "f58cd77e5",
                         "release/cueillette-en-magasin",
@@ -1247,7 +1067,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "2fd316d02",
                         "feature/cueillette-en-magasin/3516",
                         "C",
-                        "",
+                        "release/cueillette-en-magasin",
                         "#3516 : Permettre de valider si une commande est la première en cueillette."});
             table1.AddRow(new string[] {
                         "154",
@@ -1440,13 +1260,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3371 - Ajustement visuel - multiples erreurs"});
             table1.AddRow(new string[] {
-                        "179",
-                        "2ec8873be",
-                        "feature/cueillette-en-magasin/3371",
-                        "C",
-                        "",
-                        "#3711 - Correction suite au Pull request"});
-            table1.AddRow(new string[] {
                         "180",
                         "eee7655cd",
                         "release/cueillette-en-magasin",
@@ -1590,13 +1403,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3518 : Ajout d\'une fonction pour updater les shipments dans pjcOrderService"});
             table1.AddRow(new string[] {
-                        "199",
-                        "402bb425d",
-                        "feature/cueillette-en-magasin/3519",
-                        "C",
-                        "",
-                        "#3518 : Finalisation des fonction d\'update de shipments."});
-            table1.AddRow(new string[] {
                         "200",
                         "5f320db38",
                         "release/cueillette-en-magasin",
@@ -1674,20 +1480,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3395, Fix after Sarah review"});
             table1.AddRow(new string[] {
-                        "210",
-                        "f5e70f236",
-                        "feature/cueillette-en-magasin/3395",
-                        "C",
-                        "",
-                        "\"Revert \"\"#3395, Fix after Sarah review\"\"\""});
-            table1.AddRow(new string[] {
-                        "211",
-                        "e807aee01",
-                        "feature/cueillette-en-magasin/3395",
-                        "C",
-                        "",
-                        "#3395, Update after Nicolas review."});
-            table1.AddRow(new string[] {
                         "212",
                         "1ebe44d72",
                         "release/cueillette-en-magasin",
@@ -1700,7 +1492,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "d3a1acf18",
                         "feature/cueillette-en-magasin/3518",
                         "C",
-                        "",
+                        "release/cueillette-en-magasin",
                         "#3518 : Traitement suivi des # tracking (2 de X)"});
             table1.AddRow(new string[] {
                         "214",
@@ -1717,6 +1509,13 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3518 : Traitement suivi des # tracking (3 de X)"});
+            table1.AddRow(new string[] {
+                        "215a",
+                        "TEST215a",
+                        "bug/cueillette-en-magasin/fix-shipment",
+                        "C",
+                        "release/cueillette-en-magasin",
+                        ""});
             table1.AddRow(new string[] {
                         "216",
                         "a002e898d",
@@ -1841,13 +1640,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "#3518 : Ajout du délay pour les commande à notifier + correction date commande en" +
                             " retard."});
             table1.AddRow(new string[] {
-                        "232",
-                        "38c981310",
-                        "feature/cueillette-en-magasin/3518",
-                        "C",
-                        "",
-                        "#3518 : Fix query SQL"});
-            table1.AddRow(new string[] {
                         "233",
                         "8b71ebace",
                         "feature/cueillette-en-magasin/3365",
@@ -1886,13 +1678,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3520 : Modifier la création des shipment à partir des tracking number (1 de X)"});
-            table1.AddRow(new string[] {
-                        "238",
-                        "7d231fecd",
-                        "feature/cueillette-en-magasin/3520",
-                        "C",
-                        "",
-                        "#3520 : Modifier la création des shipment à partir des tracking number (2 de X)"});
             table1.AddRow(new string[] {
                         "239",
                         "f73f21d41",
@@ -1951,7 +1736,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "d00f575cd",
                         "feature/cueillette-en-magasin/3349",
                         "C",
-                        "",
+                        "release/cueillette-en-magasin",
                         "#3439 : S\'assurer que les notes d\'adresse sont copier dans le purchaseOrder"});
             table1.AddRow(new string[] {
                         "247",
@@ -2053,13 +1838,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "release/cueillette-en-magasin",
                         "#3388 - Modifier la page d\'impression de commande en cas de cueillette"});
             table1.AddRow(new string[] {
-                        "260",
-                        "03f84b160",
-                        "feature/cueillette-en-magasin/3388",
-                        "C",
-                        "",
-                        "#3388 - Corrections suite au Pull request"});
-            table1.AddRow(new string[] {
                         "261",
                         "c3ab331c3",
                         "release/cueillette-en-magasin",
@@ -2090,13 +1868,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "",
                         "#3396, Missing one comment to remove."});
             table1.AddRow(new string[] {
-                        "265",
-                        "789cb223e",
-                        "feature/cueillette-en-magasin/3396",
-                        "C",
-                        "",
-                        "#3396, Update after David review."});
-            table1.AddRow(new string[] {
                         "266",
                         "98df7a06e",
                         "release/cueillette-en-magasin",
@@ -2109,7 +1880,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "c8a4efd41",
                         "feature/cueillette-en-magasin/3401",
                         "C",
-                        "",
+                        "release/cueillette-en-magasin",
                         "#3401, Update EMailCancelConfirmation to fit in new UserControl model."});
             table1.AddRow(new string[] {
                         "268",
@@ -2123,7 +1894,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "c0d8a63a7",
                         "feature/cueillette-en-magasin/3582",
                         "C",
-                        "",
+                        "release/cueillette-en-magasin",
                         "#3582, Merge UserControl EmailPotentialFraud in UserControl model."});
             table1.AddRow(new string[] {
                         "270",
@@ -2162,14 +1933,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "release/cueillette-en-magasin",
                         "#3402, Update EmailShippingConfirmation to be in the new UserControl model and fi" +
                             "x a couple of ReSharper error."});
-            table1.AddRow(new string[] {
-                        "275",
-                        "9dacfa014",
-                        "feature/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "#3402, Update all same UserControl with Social Sharing to have the new UserContro" +
-                            "lSocial to fit in the same model and made refactoring in each open file."});
             table1.AddRow(new string[] {
                         "276",
                         "4d7806662",
@@ -2222,13 +1985,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "release/cueillette-en-magasin",
                         "Merge branch \'release/cueillette-en-magasin\' into feature/cueillette-en-magasin/3" +
                             "402-bar-code"});
-            table1.AddRow(new string[] {
-                        "283",
-                        "104eef1f9",
-                        "feature/cueillette-en-magasin/3402-bar-code",
-                        "C",
-                        "",
-                        "#3470 : Removing test values (appSettings) and removing formaters EnumString"});
             table1.AddRow(new string[] {
                         "284",
                         "2953ad824",
@@ -2397,6 +2153,13 @@ this.ScenarioInitialize(scenarioInfo);
                         "PR 1456: Merge feature/cueillette-en-magasin/3522 to release/cueillette-en-magasi" +
                             "n"});
             table1.AddRow(new string[] {
+                        "305\'",
+                        "TESTCCCC",
+                        "merge/master",
+                        "B",
+                        "master",
+                        "Merge branch \'master\' into merge/master"});
+            table1.AddRow(new string[] {
                         "305",
                         "f05be9a6a",
                         "merge/master",
@@ -2428,7 +2191,7 @@ this.ScenarioInitialize(scenarioInfo);
             table1.AddRow(new string[] {
                         "309",
                         "74335f7ee",
-                        "build/cueillette-en-magasin",
+                        "build/cueillette-en-magasin/build-asset",
                         "C",
                         "release/cueillette-en-magasin",
                         "Build assets"});
@@ -2437,7 +2200,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "a56481c2e",
                         "release/cueillette-en-magasin",
                         "M",
-                        "build/cueillette-en-magasin",
+                        "build/cueillette-en-magasin/build-asset",
                         "PR 1459: Build assets"});
             table1.AddRow(new string[] {
                         "311",
@@ -2489,41 +2252,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "C",
                         "",
                         "#3460, Final correction."});
-            table1.AddRow(new string[] {
-                        "318",
-                        "b7920d584",
-                        "feature/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "#3402, Update with code for task #3460."});
-            table1.AddRow(new string[] {
-                        "319",
-                        "42c1c32d9",
-                        "feature/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "#3402, Fix after Pier-Luc review."});
-            table1.AddRow(new string[] {
-                        "320",
-                        "7b55c5c4e",
-                        "feature/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "#3402, Update after Sarah review."});
-            table1.AddRow(new string[] {
-                        "321",
-                        "63c78212b",
-                        "feature/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "#3402, Fix text for Free Pickup to say Free Shipping for now."});
-            table1.AddRow(new string[] {
-                        "322",
-                        "22dd9624e",
-                        "feature/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "#3402, Fix social media description for emails."});
             table1.AddRow(new string[] {
                         "323",
                         "fddc35cb9",
@@ -2681,14 +2409,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "\"#3670 : Révision de \"\"boot\"\" de l\'overlay Cart pour envoyer les succursales util" +
                             "isateurs plutôt\""});
             table1.AddRow(new string[] {
-                        "344",
-                        "d0efb0df6",
-                        "bug/3670",
-                        "C",
-                        "",
-                        "Merge commit \'d8e4b52c5cd5889765f754c5dae07d39e590b893 (release/cueillette-en-mag" +
-                            "asin~26^2~1^2)\' into bug/cueillette/3670"});
-            table1.AddRow(new string[] {
                         "345",
                         "man-1",
                         "merge/master-cueillette",
@@ -2786,7 +2506,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "b385d26a7",
                         "build/cueillette-en-magasin/build-asset",
                         "C",
-                        "release/cueillette-en-magasin",
+                        "",
                         "Adding build asset"});
             table1.AddRow(new string[] {
                         "359",
@@ -2843,7 +2563,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "93a5279e1",
                         "build/cueillette-en-magasin/build-asset",
                         "C",
-                        "release/cueillette-en-magasin",
+                        "",
                         "Adding build asset"});
             table1.AddRow(new string[] {
                         "367",
@@ -2931,13 +2651,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "release/cueillette-en-magasin",
                         "#3402 : Créer une erreur en cas d\'erreur de génération de carte cadeau +"});
             table1.AddRow(new string[] {
-                        "379",
-                        "919912419",
-                        "bug/cueillette-en-magasin/3402",
-                        "C",
-                        "",
-                        "In case of null Order, make sure to not crash before throwing exception"});
-            table1.AddRow(new string[] {
                         "380",
                         "6a83ee03c",
                         "bug/cueillette-en-magasin/3362",
@@ -2968,20 +2681,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "release/cueillette-en-magasin",
                         "#3711 : Réappliquer la logique discutable de shopping-store et favorite-store"});
             table1.AddRow(new string[] {
-                        "384",
-                        "e5c4cb196",
-                        "bug/fix-bugs-cueillette",
-                        "C",
-                        "",
-                        "#3707 : Ajouter la province dans l\'overlay"});
-            table1.AddRow(new string[] {
-                        "385",
-                        "9d8339b68",
-                        "bug/fix-bugs-cueillette",
-                        "C",
-                        "",
-                        "#3707 : Ajout de la province dans les informations succursales checkout"});
-            table1.AddRow(new string[] {
                         "386",
                         "9543f8f83",
                         "release/cueillette-en-magasin",
@@ -2993,7 +2692,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "eccf7be2e",
                         "build/cueillette-en-magasin/build-asset",
                         "C",
-                        "release/cueillette-en-magasin",
+                        "",
                         "Build assets"});
             table1.AddRow(new string[] {
                         "388",
@@ -3021,7 +2720,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "b101b4dc8",
                         "build/cueillette-en-magasin/build-asset",
                         "C",
-                        "release/cueillette-en-magasin",
+                        "",
                         "Adding build asset"});
             table1.AddRow(new string[] {
                         "392",
@@ -3052,22 +2751,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "release/cueillette-en-magasin",
                         "#3711 : Mise à jour pour inclure la mise à jour de shopping-store lorsque nous fa" +
                             "isons la mise à jour de la succursale favorite"});
-            table1.AddRow(new string[] {
-                        "396",
-                        "16067193c",
-                        "bug/fix-bugs-cueillette",
-                        "C",
-                        "",
-                        "#3705 : Correction pour l\'affichage de message important lors de l\'initilisation " +
-                            "principale"});
-            table1.AddRow(new string[] {
-                        "397",
-                        "f11e8fad7",
-                        "bug/fix-bugs-cueillette",
-                        "C",
-                        "",
-                        "#3735 : Changement au niveau de l\'affichage par défaut de la section de la cueill" +
-                            "ette (ouverte)"});
             table1.AddRow(new string[] {
                         "398",
                         "c59f0f1d4",
@@ -3163,16 +2846,23 @@ this.ScenarioInitialize(scenarioInfo);
                         "bug/cueillette-en-magasin/3402",
                         "PR 1527: Adding build asset"});
             table1.AddRow(new string[] {
+                        "410a",
+                        "TESTDDDD",
+                        "release/cueillette-en-magasin",
+                        "T",
+                        "v1.14.0-RTM",
+                        ""});
+            table1.AddRow(new string[] {
                         "411",
-                        "test",
+                        "TESTEEEE",
                         "master",
                         "M",
                         "release/cueillette-en-magasin",
                         "Merge to master"});
 #line 9
  testRunner.When("I have the following events", ((string)(null)), table1, "When ");
-#line 425
- testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 432
+ testRunner.Then("The version should be (\"v1.14.0-RTM+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

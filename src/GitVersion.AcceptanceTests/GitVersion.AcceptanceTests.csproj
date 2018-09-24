@@ -55,6 +55,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>RealWorldProject.feature</DependentUpon>
     </Compile>
+    <Compile Update="SimplifiedFullScenario.feature.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SimplifiedFullScenario.feature</DependentUpon>
+    </Compile>
     <Compile Update="VersioningFeatureBranches.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -89,6 +94,10 @@
     <None Update="RealWorldProject.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RealWorldProject.feature.cs</LastGenOutput>
+    </None>
+    <None Update="SimplifiedFullScenario.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SimplifiedFullScenario.feature.cs</LastGenOutput>
     </None>
     <None Update="VersioningFeatureBranches.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
