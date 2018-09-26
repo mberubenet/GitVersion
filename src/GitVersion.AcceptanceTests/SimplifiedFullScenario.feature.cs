@@ -107,7 +107,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  testRunner.When("I have the following events", ((string)(null)), table1, "When ");
 #line 13
-    testRunner.Then("The version should be (\"1.14.0-release.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("The version should be (\"1.14.0-release.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -154,7 +154,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 18
  testRunner.When("I have the following events", ((string)(null)), table2, "When ");
 #line 23
-    testRunner.Then("The version should be (\"1.13.0-feature.homepage.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("The version should be (\"1.13.0-feature.homepage.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -248,7 +248,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 35
  testRunner.When("I have the following events", ((string)(null)), table4, "When ");
 #line 41
-    testRunner.Then("The version should be (\"1.14.0-feature.homepage.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("The version should be (\"1.14.0-feature.homepage.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -309,7 +309,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 45
  testRunner.When("I have the following events", ((string)(null)), table5, "When ");
 #line 52
-    testRunner.Then("The version should be (\"1.14.0-release.1+3\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("The version should be (\"1.14.0-release.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -468,7 +468,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 68
  testRunner.When("I have the following events", ((string)(null)), table7, "When ");
 #line 80
-    testRunner.Then("The version should be (\"1.15.0-feature.loginpage.1+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("The version should be (\"1.15.0-feature.loginpage.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -716,6 +716,282 @@ this.ScenarioInitialize(scenarioInfo);
 #line 107
  testRunner.When("I have the following events", ((string)(null)), table10, "When ");
 #line 122
+    testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("11 - One named release branch with a feature branch a commit and merge back to ma" +
+            "ster automatic branch creation")]
+        public virtual void _11_OneNamedReleaseBranchWithAFeatureBranchACommitAndMergeBackToMasterAutomaticBranchCreation()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("11 - One named release branch with a feature branch a commit and merge back to ma" +
+                    "ster automatic branch creation", null, ((string[])(null)));
+#line 124
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 125
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.13.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "IDX",
+                        "SHA",
+                        "BRANCH",
+                        "ACTION",
+                        "MERGE_SOURCE",
+                        "MESSAGE"});
+            table11.AddRow(new string[] {
+                        "0",
+                        "300e86576",
+                        "release/promo",
+                        "C",
+                        "master",
+                        ""});
+            table11.AddRow(new string[] {
+                        "1",
+                        "be24f9508",
+                        "feature/homepage",
+                        "C",
+                        "release/promo",
+                        ""});
+            table11.AddRow(new string[] {
+                        "2",
+                        "dedd43461",
+                        "release/promo",
+                        "M",
+                        "feature/homePage",
+                        ""});
+            table11.AddRow(new string[] {
+                        "3",
+                        "5963b7b2b",
+                        "release/promo",
+                        "T",
+                        "v1.14.0-RTM",
+                        ""});
+            table11.AddRow(new string[] {
+                        "4",
+                        "4f76edb18",
+                        "master",
+                        "M",
+                        "release/promo",
+                        ""});
+            table11.AddRow(new string[] {
+                        "5",
+                        "969fbd708",
+                        "master",
+                        "T",
+                        "v1.14.0",
+                        ""});
+#line 126
+ testRunner.When("I have the following events", ((string)(null)), table11, "When ");
+#line 134
+    testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("12 - HotFix and merge back named branch")]
+        public virtual void _12_HotFixAndMergeBackNamedBranch()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("12 - HotFix and merge back named branch", null, ((string[])(null)));
+#line 136
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 137
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.13.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "IDX",
+                        "SHA",
+                        "BRANCH",
+                        "ACTION",
+                        "MERGE_SOURCE",
+                        "MESSAGE"});
+            table12.AddRow(new string[] {
+                        "0",
+                        "300e86576",
+                        "release/promo",
+                        "B",
+                        "master",
+                        ""});
+            table12.AddRow(new string[] {
+                        "1",
+                        "db089c66d",
+                        "release/promo",
+                        "C",
+                        "",
+                        ""});
+            table12.AddRow(new string[] {
+                        "2",
+                        "5884caf6c",
+                        "feature/homepage",
+                        "B",
+                        "release/promo",
+                        ""});
+            table12.AddRow(new string[] {
+                        "3",
+                        "be24f9508",
+                        "feature/homepage",
+                        "C",
+                        "",
+                        ""});
+            table12.AddRow(new string[] {
+                        "4",
+                        "dedd43461",
+                        "release/promo",
+                        "M",
+                        "feature/homePage",
+                        ""});
+            table12.AddRow(new string[] {
+                        "5",
+                        "4f76edb18",
+                        "hotfix/crash",
+                        "B",
+                        "master",
+                        ""});
+            table12.AddRow(new string[] {
+                        "6",
+                        "74810224b",
+                        "hotfix/crash",
+                        "C",
+                        "",
+                        ""});
+            table12.AddRow(new string[] {
+                        "7",
+                        "5963b7b2b",
+                        "master",
+                        "M",
+                        "hotfix/crash",
+                        ""});
+            table12.AddRow(new string[] {
+                        "8",
+                        "5963b7b2b",
+                        "master",
+                        "T",
+                        "v1.13.1",
+                        ""});
+            table12.AddRow(new string[] {
+                        "9",
+                        "969fbd708",
+                        "release/promo",
+                        "M",
+                        "master",
+                        ""});
+            table12.AddRow(new string[] {
+                        "10",
+                        "529047b7a",
+                        "master",
+                        "M",
+                        "release/promo",
+                        ""});
+#line 138
+ testRunner.When("I have the following events", ((string)(null)), table12, "When ");
+#line 151
+    testRunner.Then("The version should be (\"1.13.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("13 - HotFix and merge back versioned branch")]
+        public virtual void _13_HotFixAndMergeBackVersionedBranch()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("13 - HotFix and merge back versioned branch", null, ((string[])(null)));
+#line 153
+ this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 154
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.13.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                        "IDX",
+                        "SHA",
+                        "BRANCH",
+                        "ACTION",
+                        "MERGE_SOURCE",
+                        "MESSAGE"});
+            table13.AddRow(new string[] {
+                        "0",
+                        "300e86576",
+                        "release/1.14",
+                        "B",
+                        "master",
+                        ""});
+            table13.AddRow(new string[] {
+                        "1",
+                        "db089c66d",
+                        "release/1.14",
+                        "C",
+                        "",
+                        ""});
+            table13.AddRow(new string[] {
+                        "2",
+                        "5884caf6c",
+                        "feature/homepage",
+                        "B",
+                        "release/1.14",
+                        ""});
+            table13.AddRow(new string[] {
+                        "3",
+                        "be24f9508",
+                        "feature/homepage",
+                        "C",
+                        "",
+                        ""});
+            table13.AddRow(new string[] {
+                        "4",
+                        "dedd43461",
+                        "release/1.14",
+                        "M",
+                        "feature/homePage",
+                        ""});
+            table13.AddRow(new string[] {
+                        "5",
+                        "4f76edb18",
+                        "hotfix/crash",
+                        "B",
+                        "master",
+                        ""});
+            table13.AddRow(new string[] {
+                        "6",
+                        "74810224b",
+                        "hotfix/crash",
+                        "C",
+                        "",
+                        ""});
+            table13.AddRow(new string[] {
+                        "7",
+                        "5963b7b2b",
+                        "master",
+                        "M",
+                        "hotfix/crash",
+                        ""});
+            table13.AddRow(new string[] {
+                        "8",
+                        "5963b7b2b",
+                        "master",
+                        "T",
+                        "v1.13.1",
+                        ""});
+            table13.AddRow(new string[] {
+                        "9",
+                        "969fbd708",
+                        "release/1.14",
+                        "M",
+                        "master",
+                        ""});
+            table13.AddRow(new string[] {
+                        "10",
+                        "529047b7a",
+                        "master",
+                        "M",
+                        "release/1.14",
+                        ""});
+#line 155
+ testRunner.When("I have the following events", ((string)(null)), table13, "When ");
+#line 168
     testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

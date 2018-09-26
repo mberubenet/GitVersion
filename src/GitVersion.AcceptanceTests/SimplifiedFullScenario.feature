@@ -10,7 +10,7 @@ Scenario: 01 - One versioned release branch
 | IDX  | SHA       | BRANCH            | ACTION | MERGE_SOURCE       | MESSAGE                                                                                                                                                                                                           |
 | 0    | 300e86576 | release/1.14      | B      | master             | |
 | 1    | 5884caf6c | release/1.14      | C      |                    | |
-    Then The version should be ("1.14.0-release.1+1")
+    Then The version should be ("1.14.0-release.1")
 
 
 Scenario: 02 - One versioned release branch with a feature branch
@@ -20,7 +20,7 @@ Scenario: 02 - One versioned release branch with a feature branch
 | 0    | 300e86576 | release/1.14      | B      | master             | |
 | 1    | 5884caf6c | release/1.14      | C      |                    | |
 | 2    | bf6dbbd68 | feature/homepage  | B      | release/1.14       | |
-    Then The version should be ("1.13.0-feature.homepage.1+1")
+    Then The version should be ("1.13.0-feature.homepage.1")
 
 Scenario: 03 - One versioned release branch and a feature branch no commit
 	Given GitVersion configured and a master branch at version ("1.13.0")
@@ -38,7 +38,7 @@ Scenario: 04 - One versioned release branch with a feature branch plus a commit
 | 1    | 5884caf6c | release/1.14      | C      |                    | |
 | 2    | bf6dbbd68 | feature/homepage  | B      | release/1.14       | |
 | 3    | be24f9508 | feature/homepage  | C      |                    | |
-    Then The version should be ("1.14.0-feature.homepage.1+1")
+    Then The version should be ("1.14.0-feature.homepage.1")
 
 Scenario: 05 - One versioned release branch with a feature branch a commit and merge
 	Given GitVersion configured and a master branch at version ("1.13.0")
@@ -49,7 +49,7 @@ Scenario: 05 - One versioned release branch with a feature branch a commit and m
 | 2    | bf6dbbd68 | feature/homepage  | B      | release/1.14       | |
 | 3    | be24f9508 | feature/homepage  | C      |                    | |
 | 4    | dedd43461 | release/1.14      | M      | feature/homePage   | |
-    Then The version should be ("1.14.0-release.1+3")
+    Then The version should be ("1.14.0-release.1")
 
 Scenario: 06 - One versioned release branch with a feature branch a commit and merge back to master
 	Given GitVersion configured and a master branch at version ("1.13.0")
@@ -77,7 +77,7 @@ Scenario: 07 - Start a new release after master merge
 | 7    | 5963b7b2b | feature/loginpage | B      | release/1.14       | |
 | 8    | 969fbd708 | feature/loginpage | C      |                    | |
 
-    Then The version should be ("1.15.0-feature.loginpage.1+1")
+    Then The version should be ("1.15.0-feature.loginpage.1")
 
 Scenario: 08 - One named release branch with a feature branch a commit and merge back to master
 	Given GitVersion configured and a master branch at version ("1.13.0")
@@ -121,3 +121,48 @@ Scenario: 10 - Two named release branch merged in one and merge back to master
 | 12   | 4c231dde6 | master            | M      | release/1.14       | |
     Then The version should be ("1.14.0")
 
+Scenario: 11 - One named release branch with a feature branch a commit and merge back to master automatic branch creation
+	Given GitVersion configured and a master branch at version ("1.13.0")
+	When I have the following events
+| IDX  | SHA       | BRANCH            | ACTION | MERGE_SOURCE       | MESSAGE                                                                                                                                                                                                           |
+| 0    | 300e86576 | release/promo     | C      | master             | |
+| 1    | be24f9508 | feature/homepage  | C      | release/promo      | |
+| 2    | dedd43461 | release/promo     | M      | feature/homePage   | |
+| 3    | 5963b7b2b | release/promo     | T      | v1.14.0-RTM        | |
+| 4    | 4f76edb18 | master            | M      | release/promo      | |
+| 5    | 969fbd708 | master            | T      | v1.14.0            | |
+    Then The version should be ("1.14.0")
+
+Scenario: 12 - HotFix and merge back named branch
+	Given GitVersion configured and a master branch at version ("1.13.0")
+	When I have the following events
+| IDX  | SHA       | BRANCH            | ACTION | MERGE_SOURCE       | MESSAGE                                                                                                                                                                                                           |
+| 0    | 300e86576 | release/promo     | B      | master             | |
+| 1    | db089c66d | release/promo     | C      |                    | |
+| 2    | 5884caf6c | feature/homepage  | B      | release/promo      | |
+| 3    | be24f9508 | feature/homepage  | C      |                    | |
+| 4    | dedd43461 | release/promo     | M      | feature/homePage   | |
+| 5    | 4f76edb18 | hotfix/crash      | B      | master             | |
+| 6    | 74810224b | hotfix/crash      | C      |                    | |
+| 7    | 5963b7b2b | master            | M      | hotfix/crash       | |
+| 8    | 5963b7b2b | master            | T      | v1.13.1            | |
+| 9    | 969fbd708 | release/promo     | M      | master             | |
+| 10   | 529047b7a | master            | M      | release/promo      | |
+    Then The version should be ("1.13.2")
+
+ Scenario: 13 - HotFix and merge back versioned branch
+	Given GitVersion configured and a master branch at version ("1.13.0")
+	When I have the following events
+| IDX  | SHA       | BRANCH            | ACTION | MERGE_SOURCE       | MESSAGE                                                                                                                                                                                                           |
+| 0    | 300e86576 | release/1.14      | B      | master             | |
+| 1    | db089c66d | release/1.14      | C      |                    | |
+| 2    | 5884caf6c | feature/homepage  | B      | release/1.14       | |
+| 3    | be24f9508 | feature/homepage  | C      |                    | |
+| 4    | dedd43461 | release/1.14      | M      | feature/homePage   | |
+| 5    | 4f76edb18 | hotfix/crash      | B      | master             | |
+| 6    | 74810224b | hotfix/crash      | C      |                    | |
+| 7    | 5963b7b2b | master            | M      | hotfix/crash       | |
+| 8    | 5963b7b2b | master            | T      | v1.13.1            | |
+| 9    | 969fbd708 | release/1.14      | M      | master             | |
+| 10   | 529047b7a | master            | M      | release/1.14       | |
+    Then The version should be ("1.14.0")

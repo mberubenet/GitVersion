@@ -1,9 +1,10 @@
 namespace GitVersionCore.AcceptanceTests
 {
+    using System;
     using EnumsNET;
     using GitVersion.AcceptanceTests;
 
-    internal class ActionRow
+    internal class ActionRow:ICloneable
     {
         private string _message;
         public string Idx { get; set; }
@@ -31,13 +32,10 @@ namespace GitVersionCore.AcceptanceTests
             {
                 case LogAction.Commit:
                     return FormatCommit();
-                    break;
                 case LogAction.Merge:
                     return FormatMerge();
-                    break;
                 case LogAction.Tag:
                     return FormatTag();
-                    break;
             }
 
             return "No Comment";
@@ -62,6 +60,20 @@ namespace GitVersionCore.AcceptanceTests
         private string FormatTag()
         {
             return $"Tag {MergeSourceBranch} created on branch {Branch}.";
+        }
+
+        public object Clone()
+        {
+            var newRow = new ActionRow
+            {
+                Branch = this.Branch,
+                Action = this.Action,
+                MergeSourceBranch = this.MergeSourceBranch,
+                Idx = this.Idx,
+                Message = this.Message,
+                SHA = this.SHA
+            };
+            return newRow;
         }
     }
 }

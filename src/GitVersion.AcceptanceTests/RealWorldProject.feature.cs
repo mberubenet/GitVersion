@@ -2207,7 +2207,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "ec526ab53",
                         "bug/cueillette-en-magasin/fichier-langue",
                         "C",
-                        "release/cueillette-en-magasin~36^2",
+                        "release/cueillette-en-magasin",
                         "Correction des libeléés dans AdminGJC"});
             table1.AddRow(new string[] {
                         "312",
@@ -2859,10 +2859,17 @@ this.ScenarioInitialize(scenarioInfo);
                         "M",
                         "release/cueillette-en-magasin",
                         "Merge to master"});
+            table1.AddRow(new string[] {
+                        "412",
+                        "TESTFFFF",
+                        "master",
+                        "T",
+                        "v1.14.0",
+                        "Tag master"});
 #line 9
  testRunner.When("I have the following events", ((string)(null)), table1, "When ");
 #line 432
- testRunner.Then("The version should be (\"v1.14.0-RTM+1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

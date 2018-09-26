@@ -4,22 +4,39 @@ using System.IO;
 using GitTools.Testing;
 using GitVersion;
 using GitVersionCore.Tests;
+using System.Collections.Generic;
+using System.Text;
+using EnumsNET;
+using GitVersion.AcceptanceTests;
+using LogLevel = GitTools.Logging.LogLevel;
+using static GitVersion.AcceptanceTests.SpecFlowHelper;
 
 namespace GitVersionCore.AcceptanceTests
 {
-    using System.Linq;
-    using EnumsNET;
-    using GitVersion.AcceptanceTests;
-    using GitVersion.Helpers;
-    using LibGit2Sharp;
-    using LogLevel = GitTools.Logging.LogLevel;
 
     [Binding]
     public class GenerateReleaseVersionNumberSteps
     {
+        private static VerbosityLevel _verbosityLevel;
+        private bool _produceCSV;
+        private string _csvFileName;
+        private List<string> _csvLines;
+        private Dictionary<string, int> _indentDictionary;
+        const int Indent_depth = 4;
+
         static GenerateReleaseVersionNumberSteps()
         {
             SetLogger(LogLevel.Warn);
+            _verbosityLevel = VerbosityLevel.Debug;
+        }
+
+        public GenerateReleaseVersionNumberSteps()
+        {
+            _produceCSV = false;
+            var now = DateTime.Now.ToString("yyyyMMddHHmmss");
+            _csvFileName = $@"c:\temp\cuillette-{now}.csv";
+            _csvLines = new List<string>();
+            _indentDictionary = new Dictionary<string, int>() { { "master", 0 } };
         }
 
         [Given(@"A master branch at version \(""(.*)""\)")]
@@ -31,16 +48,7 @@ namespace GitVersionCore.AcceptanceTests
         [Given(@"An external configuration at path \(""(.*)""\)")]
         public void GivenAnExternalConfigurationAtPath(string relativePath)
         {
-            var currentAssembly = this.GetType().Assembly;
-            var assemblyLocation = currentAssembly.Location;
-            var assemblyName = currentAssembly.GetName().Name;
-            var posIndex = assemblyLocation.IndexOf(assemblyName,StringComparison.InvariantCultureIgnoreCase);
-            var projectPath = assemblyLocation.Substring(0, posIndex + assemblyName.Length);
-            var configFilePath = Path.Combine(projectPath, relativePath);
-            var destinationFileName = Path.Combine(RepositoryFixture.RepositoryPath, ConfigurationProvider.DefaultConfigFileName);
-            File.Copy(configFilePath,destinationFileName);
-            Config = ConfigurationProvider.Provide(new GitPreparer(RepositoryFixture.RepositoryPath), new FileSystem(), true);
-            return;
+            Config = ConfigurationHelper.GetConfiguration(relativePath, RepositoryFixture.RepositoryPath);
         }
 
         [Given(@"GitVersion configured and a master branch at version \(""(.*)""\)")]
@@ -65,7 +73,6 @@ namespace GitVersionCore.AcceptanceTests
         {
             RepositoryFixture.BranchTo(branchName);
         }
-
 
         [When(@"I create a commit")]
         public void WhenICreateACommit()
@@ -95,16 +102,16 @@ namespace GitVersionCore.AcceptanceTests
         [When(@"I have the following events")]
         public void WhenIHaveTheFollowingEvents(Table table)
         {
+           
+            Logger.WriteWarning(new String('=', 30));
             foreach (var row in table.Rows)
             {                
                 var actionRow = GetActionRow(row);
-                Logger.WriteWarning($"{new String('-', 40)} <Begin> {new String('-', 40)}");
-                Logger.WriteWarning($"Version before {actionRow.Idx} ({actionRow.SHA} {actionRow.Branch}) : {RepositoryFixture.GetVersion(Config).FullSemVer}");
-                //var action = Enums.Parse<LogAction>(row["ACTION"], EnumFormat.Description);
+                //logVersionInfo(actionRow, "Version before", true);
                 switch (actionRow.Action)
                 {
                     case LogAction.Commit:
-                        RepositoryFixture.ApplyCommit(actionRow);
+                        RepositoryFixture.ApplyCommit(actionRow, OnBranchCreated);
                         break;
                     case LogAction.Merge:
                         RepositoryFixture.ApplyMerge(actionRow);
@@ -113,51 +120,129 @@ namespace GitVersionCore.AcceptanceTests
                         RepositoryFixture.ApplyTag(actionRow);
                         break;
                     case LogAction.Branch:
-                        RepositoryFixture.ApplyBranch(actionRow);
+                        RepositoryFixture.ApplyBranch(actionRow, OnBranchCreated);
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                Logger.WriteWarning($"SemVer Version after {actionRow.Idx} - Version at commit {actionRow.SHA} ({actionRow.Branch}) : {RepositoryFixture.GetVersion(Config).FullSemVer}");
-                Logger.WriteWarning($"Nuget package version after {actionRow.Idx} - Version at commit {actionRow.SHA} ({actionRow.Branch}) : {RepositoryFixture.GetVersion(Config).NuGetVersion}");
-                Logger.WriteWarning($"{new String('-', 40)} <End> {new String('-', 40)}");
-            }            
+                LogActionInformations(actionRow, "Version after",LogArtefact.End);
+            }
+            Logger.WriteWarning(new String('=', 30));
+            writeCSVFile();
         }
 
-        //private void ApplyCommit(ActionRow actionRow)
-        //{
-        //    createBranchIfNotExisits(actionRow);
-        //    CheckoutBranch(actionRow.Branch);
-        //    RepositoryFixture.MakeACommit();
-        //}
+        private void OnBranchCreated(string sourceBranch, string newBranch, ActionRow row)
+        {
+            AddBranchToIndentation(sourceBranch,newBranch);
+            //If action is branch, the action will be logged elsewhere
+            if (row.Action != LogAction.Branch)
+            {
+                var clonedActionRow = row.Clone() as ActionRow;
+                clonedActionRow.Action = LogAction.Branch;
+                LogActionInformations(clonedActionRow);
+            }
+        }
 
-        //private void ApplyMerge(ActionRow actionRow)
-        //{
-        //    CheckoutBranch(actionRow.Branch);
-        //    RepositoryFixture.MergeNoFF(actionRow.MergeSourceBranch);
-        //}
-        //private void ApplyTag(ActionRow actionRow)
-        //{
-        //    CheckoutBranch(actionRow.Branch);
-        //    RepositoryFixture.ApplyTag(actionRow.MergeSourceBranch);
-        //}
+        private void writeCSVFile()
+        {
+            if (_produceCSV)
+            {
+                File.WriteAllLines(_csvFileName,_csvLines);
+            }
+        }
 
-        //private void CheckoutBranch(string branchName)
-        //{
-        //    if (!RepositoryFixture.Repository.Head.HasName(branchName))
-        //    {
-        //        RepositoryFixture.Checkout(branchName);
-        //    }
-        //}
-        //private void createBranchIfNotExisits(ActionRow actionRow)
-        //{
-        //    if (!RepositoryFixture.Repository.Branches.Any(x => x.HasName(actionRow.Branch)))
-        //    {
-        //        //create branch from source
-        //        RepositoryFixture.Checkout(actionRow.MergeSourceBranch);
-        //        RepositoryFixture.BranchTo(actionRow.Branch);
-        //    }
-        //}
+        private void LogActionInformations(ActionRow row, string prefixText=null,LogArtefact? logArtefact=null)
+        {
+            int indentLevel = GetIndentLevel(row);
+
+            if (_verbosityLevel != VerbosityLevel.None)
+            {
+                if (_verbosityLevel == VerbosityLevel.Debug)
+                {
+                    LogVerbose(row,prefixText, logArtefact, indentLevel);
+                }
+                else
+                {
+                    LogShort(row, indentLevel);
+                }
+            }
+
+            formatCSVLine(row);
+        }
+
+        private void formatCSVLine(ActionRow row)
+        {
+            if (_produceCSV)
+            {
+                var lastCommit = RepositoryFixture.Repository.Head.Tip;
+                var currentBranch = RepositoryFixture.Repository.Head;
+                var versionInformation = RepositoryFixture.GetVersion(Config);
+                var text = $"{row.Idx};{row.Action};{lastCommit.ShortSHA()};{currentBranch.FriendlyName};{versionInformation.SemVer};{row.Idx} - {row.Action.Format(row, lastCommit, currentBranch)}. Current version : {versionInformation.SemVer}.";
+                _csvLines.Add(text);
+            }
+        }
+
+        private int GetIndentLevel(ActionRow row)
+        {
+            var branch = RepositoryFixture.Repository.Head.FriendlyName;
+            if (!_indentDictionary.ContainsKey(row.Branch))
+            {
+                return 0;
+            }
+
+            var result = _indentDictionary[branch];
+            return row.Action == LogAction.Branch ? Math.Max(0, result - Indent_depth) : result;
+        }
+
+        private void AddBranchToIndentation(string sourceBranch, string destinationBranch)
+        {
+            
+            int indent = 0;
+            if (_indentDictionary.ContainsKey(sourceBranch))
+            {
+                indent = _indentDictionary[sourceBranch] + Indent_depth ;
+            }
+            _indentDictionary.Add(destinationBranch,indent);
+        }
+
+        private void LogShort(ActionRow row, int indentLevel)
+        {
+            var lastCommit = RepositoryFixture.Repository.Head.Tip;
+            var currentBranch = RepositoryFixture.Repository.Head;
+            var versionInformation = RepositoryFixture.GetVersion(Config);
+            var text = $"{new String(' ',indentLevel)}{row.Idx} - {row.Action.Format(row, lastCommit, currentBranch)}. Current version : {versionInformation.SemVer}.";
+            Logger.WriteWarning(text);
+        }
+
+        private void LogVerbose(ActionRow row, string prefixText, LogArtefact? logArtefact, int indentLevel)
+        {
+            const int lineLength = 15;
+            if (logArtefact==LogArtefact.Begin)
+            {
+                Logger.WriteWarning($"{new String('-', lineLength)} <Begin> {new String('-', lineLength)}");
+            }
+            var lastCommit = RepositoryFixture.Repository.Head.Tip;
+            var currentBranch = RepositoryFixture.Repository.Head;
+            var versionInformation = RepositoryFixture.GetVersion(Config);
+            prefixText = prefixText + " ";
+            var sb = new StringBuilder();
+            sb.AppendLine("");
+            sb.AppendLine($"{nameof(versionInformation.FullSemVer)} : {versionInformation.FullSemVer}");
+            sb.AppendLine($"{nameof(versionInformation.SemVer)} : {versionInformation.SemVer}");
+            sb.AppendLine($"{nameof(versionInformation.AssemblySemVer)} : {versionInformation.AssemblySemVer}");
+            sb.AppendLine($"{nameof(versionInformation.AssemblySemFileVer)} : {versionInformation.AssemblySemFileVer}");
+            sb.AppendLine($"{nameof(versionInformation.InformationalVersion)} : {versionInformation.InformationalVersion}");
+            sb.AppendLine($"{nameof(versionInformation.NuGetVersion)} : {versionInformation.NuGetVersion}");
+            sb.AppendLine($"{nameof(versionInformation.Major)} : {versionInformation.Major}");
+            sb.AppendLine($"{nameof(versionInformation.Minor)} : {versionInformation.Minor}");
+            sb.AppendLine($"{nameof(versionInformation.Patch)} : {versionInformation.Patch}");
+            var text = $"{new String(' ', indentLevel)}{prefixText}{row.Idx} - {row.Action.Format(row, lastCommit, currentBranch)}. {sb.ToString().TrimEnd(Environment.NewLine.ToCharArray())}";
+            Logger.WriteWarning(text);
+            if (logArtefact == LogArtefact.End)
+            {
+                Logger.WriteWarning($"{new String('-', lineLength)} <End> {new String('-', lineLength)}{Environment.NewLine}");
+            }
+        }
 
         private ActionRow GetActionRow(TableRow row)
         {
@@ -177,11 +262,11 @@ namespace GitVersionCore.AcceptanceTests
         {
             if (Config != null)
             {
-                RepositoryFixture.AssertFullSemver(Config, expectedVersion);
+                RepositoryFixture.AssertSemver(Config, expectedVersion);
             }
             else
             {
-                RepositoryFixture.AssertFullSemver(expectedVersion);
+                RepositoryFixture.AssertSemver(expectedVersion);
             }
         }
 
@@ -195,27 +280,14 @@ namespace GitVersionCore.AcceptanceTests
         {
             get
             {
-                return GetOrCreate("RepositoryFixture", () => new EmptyRepositoryFixture());
+                return GetOrCreate(() => new EmptyRepositoryFixture());
             }
         }
 
-        private Config Config { get; set; }
-
-        private T GetOrCreate<T>(string propertyName, Func<T> createInstanceFunc) where T : class
+        private Config Config
         {
-
-            T currentProperty = null;
-            if (ScenarioContext.Current.ContainsKey(propertyName))
-            {
-                currentProperty = ScenarioContext.Current[propertyName] as T;
-            }
-
-            if (currentProperty == null)
-            {
-                currentProperty = createInstanceFunc();
-                ScenarioContext.Current.Add(propertyName,currentProperty);
-            }
-            return currentProperty;
+            get => Get<Config>();
+            set => Set(value);
         }
 
         private static void SetLogger(LogLevel logLevel)
@@ -233,68 +305,6 @@ namespace GitVersionCore.AcceptanceTests
             {
                 Console.WriteLine(message);
             }
-        }
-    }
-
-    internal static class GitHelperExtensions
-    {
-        public static bool HasName(this Branch branchToCheck, string nameToCheck)
-        {
-            return string.Compare(branchToCheck?.FriendlyName, nameToCheck, StringComparison.InvariantCultureIgnoreCase) == 0;
-        }
-        public static void ApplyBranch(this RepositoryFixtureBase repositoryFixture, ActionRow actionRow)
-        {
-            repositoryFixture.createBranchIfNotExisits(actionRow);
-            //repositoryFixture.CheckoutBranch(actionRow.Branch);
-            //repositoryFixture.MakeACommit();
-        }
-
-        public static void ApplyCommit(this RepositoryFixtureBase repositoryFixture, ActionRow actionRow)
-        {
-            repositoryFixture.createBranchIfNotExisits(actionRow);
-            repositoryFixture.CheckoutBranch(actionRow.Branch);
-            repositoryFixture.MakeACommit();
-        }
-
-        public static void ApplyMerge(this RepositoryFixtureBase repositoryFixture, ActionRow actionRow)
-        {
-            //var result = (repositoryFixture.createBranchIfNotExisits(actionRow));
-            repositoryFixture.CheckoutBranch(actionRow.Branch);
-            //if (result)
-            //{
-            //    //If we needed to create a branch on merge (meaning that the branche creation have not in our dataset), force a commit
-            //    repositoryFixture.ApplyCommit(actionRow);
-            //}
-            repositoryFixture.MergeNoFF(actionRow.MergeSourceBranch);
-        }
-        public static void ApplyTag(this RepositoryFixtureBase repositoryFixture, ActionRow actionRow)
-        {
-            repositoryFixture.CheckoutBranch(actionRow.Branch);
-            repositoryFixture.ApplyTag(actionRow.MergeSourceBranch);
-        }
-
-        private static void CheckoutBranch(this RepositoryFixtureBase repositoryFixture, string branchName)
-        {
-            if (!repositoryFixture.Repository.Head.HasName(branchName))
-            {
-                repositoryFixture.Checkout(branchName);
-            }
-        }
-        private static bool createBranchIfNotExisits(this RepositoryFixtureBase repositoryFixture, ActionRow actionRow)
-        {
-            if (!repositoryFixture.Repository.Branches.Any(x => x.HasName(actionRow.Branch)))
-            {
-                //create branch from source
-                if (string.IsNullOrWhiteSpace(actionRow.MergeSourceBranch))
-                {
-                    throw new ArgumentNullException(nameof(actionRow.MergeSourceBranch), $"Idx {actionRow.Idx}: Impossible de créer la branche {actionRow.Branch} car aucune branche source n'est spécifiée");
-                }
-                repositoryFixture.Checkout(actionRow.MergeSourceBranch);
-                repositoryFixture.BranchTo(actionRow.Branch);
-                return true;
-            }
-
-            return false;
         }
     }
 }
