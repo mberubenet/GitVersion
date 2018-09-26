@@ -533,7 +533,7 @@ this.ScenarioInitialize(scenarioInfo);
                         "5963b7b2b",
                         "release/promo",
                         "T",
-                        "v1.14.0-RTM",
+                        "RTM/v1.14.0-RTM",
                         ""});
             table8.AddRow(new string[] {
                         "6",
@@ -889,7 +889,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 138
  testRunner.When("I have the following events", ((string)(null)), table12, "When ");
 #line 151
-    testRunner.Then("The version should be (\"1.13.1\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+    testRunner.Then("The version should be (\"1.13.2\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -992,6 +992,118 @@ this.ScenarioInitialize(scenarioInfo);
 #line 155
  testRunner.When("I have the following events", ((string)(null)), table13, "When ");
 #line 168
+    testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("14 - Two named release branch merged in one from release and merge back to master" +
+            "")]
+        public virtual void _14_TwoNamedReleaseBranchMergedInOneFromReleaseAndMergeBackToMaster()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("14 - Two named release branch merged in one from release and merge back to master" +
+                    "", null, ((string[])(null)));
+#line 170
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 171
+ testRunner.Given("GitVersion configured and a master branch at version (\"1.13.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                        "IDX",
+                        "SHA",
+                        "BRANCH",
+                        "ACTION",
+                        "MERGE_SOURCE",
+                        "MESSAGE"});
+            table14.AddRow(new string[] {
+                        "0",
+                        "300e86576",
+                        "release/promo",
+                        "B",
+                        "master",
+                        ""});
+            table14.AddRow(new string[] {
+                        "1",
+                        "db089c66d",
+                        "release/promo",
+                        "C",
+                        "",
+                        ""});
+            table14.AddRow(new string[] {
+                        "2",
+                        "5884caf6c",
+                        "feature/homepage",
+                        "B",
+                        "release/promo",
+                        ""});
+            table14.AddRow(new string[] {
+                        "3",
+                        "be24f9508",
+                        "feature/homepage",
+                        "C",
+                        "",
+                        ""});
+            table14.AddRow(new string[] {
+                        "4",
+                        "dedd43461",
+                        "release/concours",
+                        "B",
+                        "master",
+                        ""});
+            table14.AddRow(new string[] {
+                        "5",
+                        "4f76edb18",
+                        "feature/concours",
+                        "B",
+                        "release/concours",
+                        ""});
+            table14.AddRow(new string[] {
+                        "6",
+                        "74810224b",
+                        "feature/concours",
+                        "C",
+                        "",
+                        ""});
+            table14.AddRow(new string[] {
+                        "7",
+                        "5963b7b2b",
+                        "release/promo",
+                        "M",
+                        "feature/homePage",
+                        ""});
+            table14.AddRow(new string[] {
+                        "8",
+                        "969fbd708",
+                        "release/concours",
+                        "M",
+                        "feature/concours",
+                        ""});
+            table14.AddRow(new string[] {
+                        "9",
+                        "529047b7a",
+                        "release/1.14",
+                        "B",
+                        "release/promo",
+                        ""});
+            table14.AddRow(new string[] {
+                        "10",
+                        "75e8cdbcf",
+                        "release/1.14",
+                        "M",
+                        "release/concours",
+                        ""});
+            table14.AddRow(new string[] {
+                        "11",
+                        "4c231dde6",
+                        "master",
+                        "M",
+                        "release/1.14",
+                        ""});
+#line 172
+ testRunner.When("I have the following events", ((string)(null)), table14, "When ");
+#line 186
     testRunner.Then("The version should be (\"1.14.0\")", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

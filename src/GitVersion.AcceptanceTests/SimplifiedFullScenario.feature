@@ -88,7 +88,7 @@ Scenario: 08 - One named release branch with a feature branch a commit and merge
 | 2    | bf6dbbd68 | feature/homepage  | B      | release/promo      | |
 | 3    | be24f9508 | feature/homepage  | C      |                    | |
 | 4    | dedd43461 | release/promo     | M      | feature/homePage   | |
-| 5    | 5963b7b2b | release/promo     | T      | v1.14.0-RTM        | |
+| 5    | 5963b7b2b | release/promo     | T      | RTM/v1.14.0-RTM    | |
 | 6    | 4f76edb18 | master            | M      | release/promo      | |
 | 7    | 969fbd708 | master            | T      | v1.14.0            | |
     Then The version should be ("1.14.0")
@@ -165,4 +165,22 @@ Scenario: 12 - HotFix and merge back named branch
 | 8    | 5963b7b2b | master            | T      | v1.13.1            | |
 | 9    | 969fbd708 | release/1.14      | M      | master             | |
 | 10   | 529047b7a | master            | M      | release/1.14       | |
+    Then The version should be ("1.14.0")
+
+Scenario: 14 - Two named release branch merged in one from release and merge back to master
+	Given GitVersion configured and a master branch at version ("1.13.0")
+	When I have the following events
+| IDX  | SHA       | BRANCH            | ACTION | MERGE_SOURCE       | MESSAGE                                                                                                                                                                                                           |
+| 0    | 300e86576 | release/promo     | B      | master             | |
+| 1    | db089c66d | release/promo     | C      |                    | |
+| 2    | 5884caf6c | feature/homepage  | B      | release/promo      | |
+| 3    | be24f9508 | feature/homepage  | C      |                    | |
+| 4    | dedd43461 | release/concours  | B      | master             | |
+| 5    | 4f76edb18 | feature/concours  | B      | release/concours   | |
+| 6    | 74810224b | feature/concours  | C      |                    | |
+| 7    | 5963b7b2b | release/promo     | M      | feature/homePage   | |
+| 8    | 969fbd708 | release/concours  | M      | feature/concours   | |
+| 9    | 529047b7a | release/1.14      | B      | release/promo      | |
+| 10   | 75e8cdbcf | release/1.14      | M      | release/concours   | |
+| 11   | 4c231dde6 | master            | M      | release/1.14       | |
     Then The version should be ("1.14.0")
