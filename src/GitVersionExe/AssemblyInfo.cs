@@ -9,4 +9,4 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("AcceptanceTests")]
 [assembly: InternalsVisibleTo("GitVersionExe.Tests")]
 
-[assembly: AssemblyInformationalVersion("4.0.0-netstandard.1+1538.Branch.feature/netstandard.Sha.91536c107ba91f755f14904fc69965a9ad70fcb0")]
+[assembly: AssemblyInformationalVersion("4.0.0-beta.15+1618.Branch.release/4.0.Sha.e5fa048cbda29e2d5d330863fa901e01dc9a0f35")]
