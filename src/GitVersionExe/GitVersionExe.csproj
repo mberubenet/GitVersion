@@ -90,7 +90,7 @@
     <ProjectReference Include="..\GitVersionCore\GitVersionCore.csproj" />     
   </ItemGroup>
  
-  <Target Name="Clean">
+  <Target Name="Clean" BeforeTargets="Build">
     <ItemGroup>
       <ExeFilesToDelete Include="$(BuildDir)NuGetExeBuild\**\*.*;$(BuildDir)NuGetCommandLineBuild\**\*.*;$(BuildDir)GemBuild\**\*.*" />
     </ItemGroup>
@@ -116,7 +116,8 @@
           ]]></Code>
     </Task>
   </UsingTask>
-  <Target Name="AfterBuild" DependsOnTargets="Clean" Condition="$(NCrunch)==''">
+  <Target Name="AssetBuilding" Condition="$(NCrunch)==''" AfterTargets="Build">
+	<Message Text="***** Dans AssetBuilding *****" importance="high" />
     <PropertyGroup>
       <Runtime Condition="'$(OS)'=='Unix'">mono</Runtime>
     </PropertyGroup>
@@ -128,6 +129,10 @@
       <WindowsBinaries Include="$(TargetDir)lib\**\*.dll" />
       <LibGit2SharpFiles Include="$(TargetDir)LibGit2Sharp.*" Exclude="$(TargetDir)LibGit2Sharp.xml" />
     </ItemGroup>
+	
+	<PropertyGroup>
+		<GitVersion_SemVer>4.0.0</GitVersion_SemVer>
+	</PropertyGroup>
   
     <!-- TfsBuildTask -->
     <Exec Command="powershell -ExecutionPolicy RemoteSigned -NoProfile &quot;$(SolutionDir)GitVersionTfsTask\BuildTs.ps1&quot;" Condition="'$(GitVersion_SemVer)' != ''" />
@@ -137,11 +142,12 @@
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\overview.md" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild" Condition="'$(GitVersion_SemVer)' != ''" />
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\builds.png" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\img" Condition="'$(GitVersion_SemVer)' != ''" />
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\build-task.png" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\img" Condition="'$(GitVersion_SemVer)' != ''" />
-    <Copy SourceFiles="$(OutputPath)ILMergeTemp\GitVersion.exe" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
-    <Copy SourceFiles="$(OutputPath)GitVersion.pdb" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="Exists('$(OutputPath)GitVersion.pdb') And '$(GitVersion_SemVer)' != ''" />
+    <!--<Copy SourceFiles="$(OutputPath)ILMergeTemp\GitVersion.exe" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
+    <Copy SourceFiles="$(OutputPath)GitVersion.pdb" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="Exists('$(OutputPath)GitVersion.pdb') And '$(GitVersion_SemVer)' != ''" />-->
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\icon.png" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\task.json" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
-    <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\GitVersion.js" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
+    <!--<Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\GitVersion.js" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />-->
+	<Message Text="$(GitVersion_SemVer)" />
     <ReplaceFileText InputFilename="$(BuildDir)GitVersionTfsTaskBuild\manifest.json" OutputFilename="$(BuildDir)GitVersionTfsTaskBuild\manifest.json" MatchExpression="\$version\$" ReplacementText="$(GitVersion_SemVer)" Condition="'$(GitVersion_SemVer)' != ''" />
     <Exec Command="powershell -ExecutionPolicy RemoteSigned -NoProfile &quot;$(SolutionDir)GitVersionTfsTask\Update-GitVersionTfsTaskVersion.ps1 $(BuildDir)GitVersionTfsTaskBuild\GitVersionTask\task.json $(GitVersion_MajorMinorPatch)&quot;" WorkingDirectory="$(BuildDir)" Condition="'$(GitVersion_MajorMinorPatch)' != ''" />
     <Exec Command="powershell -ExecutionPolicy RemoteSigned -NoProfile &quot;$(SolutionDir)GitVersionTfsTask\Create-Vsix.ps1 $(BuildDir)GitVersionTfsTaskBuild&quot;" Condition="'$(GitVersion_SemVer)' != ''" />
@@ -151,7 +157,7 @@
     <Copy SourceFiles="@(WindowsBinaries)" DestinationFiles="@(WindowsBinaries->'$(BuildDir)GemBuild\bin\lib\%(RecursiveDir)%(Filename)%(Extension)')" />
     <Copy SourceFiles="$(OutputPath)GitVersion.pdb" DestinationFolder="$(BuildDir)GemBuild\bin" Condition="Exists('$(OutputPath)GitVersion.pdb')" />
     <Copy SourceFiles="$(OutputPath)GitVersion.exe.mdb" DestinationFolder="$(BuildDir)GemBuild\bin" Condition="Exists('$(OutputPath)GitVersion.exe.mdb')" />
-    <Copy SourceFiles="$(OutputPath)ILMergeTemp\GitVersion.exe" DestinationFolder="$(BuildDir)GemBuild\bin" />
+    <Copy SourceFiles="$(OutputPath)GitVersion.exe" DestinationFolder="$(BuildDir)GemBuild\bin" />
     <ItemGroup>
       <GemFiles Include="$(ProjectDir)GemAssets\bin*\**\*.*" />
       <GemFiles Include="$(ProjectDir)GemAssets\lib*\**\*.*" />
