@@ -146,10 +146,10 @@
     <Copy SourceFiles="$(OutputPath)GitVersion.pdb" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="Exists('$(OutputPath)GitVersion.pdb') And '$(GitVersion_SemVer)' != ''" />-->
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\icon.png" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
     <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\task.json" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
-    <!--<Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\GitVersion.js" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />-->
+    <Copy SourceFiles="$(SolutionDir)GitVersionTfsTask\GitVersion.js" DestinationFolder="$(BuildDir)GitVersionTfsTaskBuild\GitVersionTask" Condition="'$(GitVersion_SemVer)' != ''" />
 	<Message Text="$(GitVersion_SemVer)" />
     <ReplaceFileText InputFilename="$(BuildDir)GitVersionTfsTaskBuild\manifest.json" OutputFilename="$(BuildDir)GitVersionTfsTaskBuild\manifest.json" MatchExpression="\$version\$" ReplacementText="$(GitVersion_SemVer)" Condition="'$(GitVersion_SemVer)' != ''" />
-    <Exec Command="powershell -ExecutionPolicy RemoteSigned -NoProfile &quot;$(SolutionDir)GitVersionTfsTask\Update-GitVersionTfsTaskVersion.ps1 $(BuildDir)GitVersionTfsTaskBuild\GitVersionTask\task.json $(GitVersion_MajorMinorPatch)&quot;" WorkingDirectory="$(BuildDir)" Condition="'$(GitVersion_MajorMinorPatch)' != ''" />
+    <Exec Command="powershell -ExecutionPolicy RemoteSigned -NoProfile &quot;$(SolutionDir)GitVersionTfsTask\Update-GitVersionTfsTaskVersion.ps1 $(BuildDir)GitVersionTfsTaskBuild\GitVersionTask\task.json $(GitVersion_SemVer)&quot;" WorkingDirectory="$(BuildDir)" Condition="'$(GitVersion_MajorMinorPatch)' != ''" />
     <Exec Command="powershell -ExecutionPolicy RemoteSigned -NoProfile &quot;$(SolutionDir)GitVersionTfsTask\Create-Vsix.ps1 $(BuildDir)GitVersionTfsTaskBuild&quot;" Condition="'$(GitVersion_SemVer)' != ''" />
     <!-- Gem -->
     <MakeDir Directories="$(BuildDir)GemBuild" />
